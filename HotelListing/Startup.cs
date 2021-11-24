@@ -28,6 +28,14 @@ namespace HotelListing
         {
 
             services.AddControllers();
+            services.AddCors(o =>
+            {
+                o.AddPolicy("CorsPolicyAllowAll", builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            }
+            );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelListing", Version = "v1" });
@@ -45,6 +53,7 @@ namespace HotelListing
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("CorsPolicyAllowAll");
 
             app.UseRouting();
 
