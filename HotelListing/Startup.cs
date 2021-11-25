@@ -1,3 +1,4 @@
+using HotelListing.Configurations;
 using HotelListing.Contexto;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,11 +40,14 @@ namespace HotelListing
                 .AllowAnyHeader());
             }
             );
+
+            services.AddAutoMapper(typeof(MapperInitialize));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelListing", Version = "v1" });
             });
-            services.AddControllers();
+            services.AddControllers(); 
 
         }
 
