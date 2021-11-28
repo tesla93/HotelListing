@@ -21,6 +21,7 @@ namespace HotelListing.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [DataType(DataType.PhoneNumber)]
-        public string PoneNumber { get; set; }       
+        public string PoneNumber { get; set; }
+        public IEnumerable<string> Roles { get; set; }
     }
 }
