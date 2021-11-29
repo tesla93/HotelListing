@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HotelListing.Data;
 using HotelListing.Models;
+using HotelListing.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,15 +20,18 @@ namespace HotelListing.Controllers
         private readonly UserManager<ApiUser> _userManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IMapper _mapper;
+        private readonly IAuthManager _authManager;
 
         public AccountController(UserManager<ApiUser> userManager,
             ILogger<AccountController> logger,
-            IMapper mapper
+            IMapper mapper,
+            IAuthManager authManager
             )
         {
             _userManager = userManager;
             _logger = logger;
             _mapper = mapper;
+            _authManager = authManager;
         }
 
         [HttpPost]
@@ -61,29 +65,28 @@ namespace HotelListing.Controllers
             }
         }
 
-        //[HttpPost]
-        //[Route("login")]
-        //public async Task<IActionResult> Login([FromBody] UserLoginDTO userLoginDto)
-        //{
-        //    _logger.LogInformation($"Attempt to Login for {userLoginDto}");
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    try
-        //    {
-        //        var result = await _signInManager.PasswordSignInAsync(userLoginDto.Email, userLoginDto.Password, false, false);
-        //        if (!result.Succeeded)
-        //        {
-        //            return Unauthorized(userLoginDto);
-        //        }
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex,$"Something went wrong in the {nameof(Login)}");
-        //        return StatusCode(500, "Something went wrong in the login. Please try again later");
-        //    }
-        //}
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] UserLoginDTO userLoginDto)
+        {
+            _logger.LogInformation($"Attempt to Login for {userLoginDto}");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                if (!(await _authManager.ValidateUser(userLoginDto)))
+                {
+                    return Unauthorized();
+                }
+                return Accepted(new { Token = _authManager.CreateToken() });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in the {nameof(Login)}");
+                return StatusCode(500, "Something went wrong in the login. Please try again later");
+            }
+        }
     }
 }

@@ -36,6 +36,7 @@ namespace HotelListing
                     {
                         ValidateIssuer = true,
                         ValidateLifetime = true,
+                        ValidateAudience=false,
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettings.GetSection("Issuer").Value,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
