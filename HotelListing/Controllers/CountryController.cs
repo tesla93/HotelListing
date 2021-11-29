@@ -43,7 +43,7 @@ namespace HotelListing.Controllers
                 return StatusCode(500, "Internal server error. Please try again later");                
             }
         }
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int}", Name = nameof(GetCountry))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCountry(int id)
@@ -58,6 +58,31 @@ namespace HotelListing.Controllers
             {
                 _logger.LogError(ex, $"Something went wrong in the {nameof(GetCountry)}");
                 return StatusCode(500, "Internal server error. Please try again later");
+            }
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateCountry([FromBody] CreateCountryDTO countryDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError($"Invalid POST attempt in {nameof(CreateCountry)}");
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var country = _mapper.Map<Country>(countryDTO);
+                await _unitOfWork.Countries.Insert(country);
+                await _unitOfWork.Save();
+                return CreatedAtRoute(nameof(GetCountry), new { id = country.Id }, country);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in the {nameof(CreateCountry)}");
+                return StatusCode(500, ex.Message);
             }
         }
     }

@@ -1,21 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HotelListing.Models
 {
-    public class HotelDTO
+    public class CreateHotelDTO
+    {
+        [Required]
+        [StringLength(maximumLength: 150, ErrorMessage = "Hotel Name Is Too Long")]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(maximumLength: 250, ErrorMessage = "Address Name Is Too Long")]
+        public string Address { get; set; }
+
+        [Required]
+        [Range(1, 5)]
+        public double Rating { get; set; }
+
+        //////[Required]
+        public int CountryId { get; set; }
+    }
+
+    public class UpdateHotelDTO : CreateHotelDTO
+    {
+
+    }
+
+    public class HotelDTO : CreateHotelDTO
     {
         public int Id { get; set; }
-        [Required]
-        [StringLength(maximumLength: 50, ErrorMessage = "Hotel name is too long")]
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public double Rating { get; set; }
-        public int CountryId { get; set; }
-        public CountryDTO CountryNavigation { get; set; }
-
+        public CountryDTO Country { get; set; }
     }
 }
