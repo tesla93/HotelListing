@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZklrmInQvjud2fQNsP2i1xeNAYw5ysXLXqPtXoUAIAJ/TXZdtH9irwdRcGxkyZ1ORPuGfckcDRzKz+KeXaT6eQ==",
+  "dgSpecHash": "96r6jJ3C4Qdjfz8sKLwDvvwmwt2MiUB4PYa+OQN4rStvnO6eiYzOYdnZKQP7C/Ivu6A0bw/wjHWXg9dNbtcMHA==",
   "success": true,
   "projectFilePath": "D:\\German\\.net\\projects\\Udemy_Web_Api_Development_Course\\HotelListing\\HotelListing\\HotelListing.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\5.0.1\\microsoft.aspnetcore.identity.entityframeworkcore.5.0.1.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.1\\microsoft.aspnetcore.jsonpatch.5.0.1.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.1\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.1.nupkg.sha512",
+    "C:\\Users\\leoct\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",
