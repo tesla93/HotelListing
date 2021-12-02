@@ -1,6 +1,7 @@
 ﻿using HotelListing.Contexto;
 using HotelListing.Data;
 using HotelListing.Models;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -81,5 +82,22 @@ namespace HotelListing
                 opt.DefaultApiVersion = new ApiVersion(1, 0);
             });
         }
+
+        public static void ConfigureHttpCacheHeader(this IServiceCollection services)
+        {
+            services.AddResponseCaching();
+            services.AddHttpCacheHeaders(
+                (expirationOption) =>
+                {
+                    expirationOption.MaxAge = 120;
+                    expirationOption.CacheLocation = CacheLocation.Private;
+                },
+                (validationOption) =>
+                {
+                    validationOption.MustRevalidate = true;
+                }
+                );
+        }
+
     }
 }

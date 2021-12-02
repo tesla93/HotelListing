@@ -35,6 +35,7 @@ namespace HotelListing
         {
             services.AddDbContext<DatabaseContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("sqlConnection")));
+            services.AddResponseCaching();
 
             services.AddAuthentication();
             services.ConfigureIdentity();
@@ -57,10 +58,16 @@ namespace HotelListing
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelListing", Version = "v1" });
             });
-            services.AddControllers().AddNewtonsoftJson(o => 
+            services.AddControllers(config => {
+                config.CacheProfiles.Add("120SecondsDuration", new CacheProfile
+                {
+                    Duration = 120
+                });
+            }).AddNewtonsoftJson(o => 
             o.SerializerSettings.ReferenceLoopHandling= Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.ConfigureVersioning();
+            services.ConfigureHttpCacheHeader();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +86,8 @@ namespace HotelListing
             app.UseCors("CorsPolicyAllowAll");
 
             app.UseRouting();
+            app.UseResponseCaching();
+            app.UseHttpCacheHeaders();
 
             app.UseAuthentication();
             app.UseAuthorization();

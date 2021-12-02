@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace HotelListing.Controllers
 {
-    [ApiVersion("2.0")]  ///api/Country?api-version=2.0
-    //[Route("api/country")]
-    [Route("api/{v:apiversion}/country")]
+    [ApiVersion("2.0", Deprecated =true)]  ///api/Country?api-version=2.0  // otra opcion pasandole la version por el header
+    [Route("api/country")]
+    //[Route("api/{v:apiversion}/country")]
     [ApiController]
     public class CountryV2Controller : Controller
     {
