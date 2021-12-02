@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "TQTsEmSGXlOM0C0eRZF7Mu5yEv8A174MMqU6pj5pO6mBsoE5s2euOr9qkVRo6jT7iUO31El/otvA2BtQk8TSdw==",
+  "dgSpecHash": "TpP0wfzumci6bcRiLz4Ck/NA0MVH+qZha/HNiocF6aL1nKGQM0MOv6QyYto4Wnp8NIZQJcOXcv8EJLOl8kNdbA==",
   "success": true,
   "projectFilePath": "D:\\German\\.net\\projects\\Udemy_Web_Api_Development_Course\\HotelListing\\HotelListing\\HotelListing.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\leoct\\.nuget\\packages\\aspnetcoreratelimit\\3.2.2\\aspnetcoreratelimit.3.2.2.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -64,7 +65,7 @@
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
-    "C:\\Users\\leoct\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\leoct\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\leoct\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512",

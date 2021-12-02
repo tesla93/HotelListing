@@ -1,4 +1,5 @@
-﻿using HotelListing.Contexto;
+﻿using AspNetCoreRateLimit;
+using HotelListing.Contexto;
 using HotelListing.Data;
 using HotelListing.Models;
 using Marvin.Cache.Headers;
@@ -38,12 +39,13 @@ namespace HotelListing
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }
-                ).AddJwtBearer(o => {
+                ).AddJwtBearer(o =>
+                {
                     o.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidateLifetime = true,
-                        ValidateAudience=false,
+                        ValidateAudience = false,
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = jwtSettings.GetSection("Issuer").Value,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
@@ -54,7 +56,8 @@ namespace HotelListing
 
         public static void ConfigureExceptionHandler(this IApplicationBuilder app)
         {
-            app.UseExceptionHandler(error => {
+            app.UseExceptionHandler(error =>
+            {
                 error.Run(async context =>
                 {
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
@@ -66,7 +69,7 @@ namespace HotelListing
                         await context.Response.WriteAsync(new Error
                         {
                             StatusCode = context.Response.StatusCode,
-                            Message=$"Internal server error. Please try again later"
+                            Message = $"Internal server error. Please try again later"
                         }.ToString());
                     }
                 });
@@ -97,6 +100,26 @@ namespace HotelListing
                     validationOption.MustRevalidate = true;
                 }
                 );
+        }
+
+        public static void ConfigureRateLimiting(this IServiceCollection services)
+        {
+            var rateLimitRules = new List<RateLimitRule>
+            {
+                new RateLimitRule
+                {
+                    Endpoint="*",
+                    Limit=1,
+                    Period="20s"
+                }
+            };
+            services.Configure<IpRateLimitOptions>(opt =>
+            {
+                opt.GeneralRules = rateLimitRules;
+            });
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
         }
 
     }
