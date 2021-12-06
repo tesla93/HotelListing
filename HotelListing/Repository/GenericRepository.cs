@@ -31,10 +31,7 @@ namespace HotelListing.Repository
             }
             if (includes != null)
             {
-                foreach (var includeProperty in includes)
-                {
-                    query = query.Include(includeProperty);
-                }
+                includes.Select(includeProperty => query= query.Include(includeProperty));
             }
             if (orderBy != null)
             {
@@ -48,10 +45,7 @@ namespace HotelListing.Repository
             IQueryable<T> query = _db;
             if (includes != null)
             {
-                foreach(var includeProperty in includes)
-                {
-                    query = query.Include(includeProperty);
-                }
+                includes.Select(includeProperty => query = query.Include(includeProperty));
             }
             return await query.AsNoTracking().FirstOrDefaultAsync(expression);
         }
