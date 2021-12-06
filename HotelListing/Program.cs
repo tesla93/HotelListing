@@ -17,7 +17,7 @@ namespace HotelListing
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.File(
-                path: "d:\\hotellistings\\logs\\log-.txt",
+                path: "logs\\log-.txt",
                 outputTemplate: "{Timestamp: yyy-MM-dd HH:mm:ss.fff zzz} [{level:u3}] {Message:lj}{NewLine}{Exception}",
                 rollingInterval: RollingInterval.Day,
                 restrictedToMinimumLevel: LogEventLevel.Information
